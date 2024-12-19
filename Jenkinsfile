@@ -6,24 +6,24 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-
+                git branch : 'master'
                 git 'https://github.com/Salwahnid/QualityAssurance_LibrarySystem.git'
             }
         }
         stage('Build') {
             steps {
-                sh '$maven/bin/mvn clean compile'
+                sh '"${MAVEN_HOME}/bin/mvn" clean compile'
             }
         }
         stage('Test') {
             steps {
-                sh '$maven/bin/mvn test'
+                sh '"${MAVEN_HOME}/bin/mvn" test'
             }
         }
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '$maven/bin/mvn sonar:sonar'
+                    sh '"${MAVEN_HOME}/bin/mvn" sonar:sonar'
                 }
             }
         }
