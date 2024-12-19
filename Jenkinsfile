@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch : 'master'
+                git branch : 'master',
                 git 'https://github.com/Salwahnid/QualityAssurance_LibrarySystem.git'
             }
         }
