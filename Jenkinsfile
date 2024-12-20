@@ -11,18 +11,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat '"${Maven}/mvn" clean compile'
+                bat "\"${Maven}\\bin\\mvn.cmd\" clean compile"
             }
         }
         stage('Test') {
             steps {
-                bat '"${Maven}/mvn" test'
+                bat '\"${Maven}\\bin\\mvn.cmd\" test'
             }
         }
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    bat '"${Maven}/mvn" sonar:sonar'
+                    bat '\"${Maven}\\bin\\mvn.cmd\" sonar:sonar'
                 }
             }
         }
