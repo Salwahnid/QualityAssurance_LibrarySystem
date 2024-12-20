@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        MAVEN_HOME = tool 'Maven'
+        Maven = tool 'Maven'
     }
     stages {
         stage('Detect OS') {
@@ -24,18 +24,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '"${MAVEN_HOME}/bin/mvn" clean compile'
+                sh '"${Maven}/bin/mvn" clean compile'
             }
         }
         stage('Test') {
             steps {
-                sh '"${MAVEN_HOME}/bin/mvn" test'
+                sh '"${Maven}/bin/mvn" test'
             }
         }
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '"${MAVEN_HOME}/bin/mvn" sonar:sonar'
+                    sh '"${Maven}/bin/mvn" sonar:sonar'
                 }
             }
         }
