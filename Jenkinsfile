@@ -4,19 +4,6 @@ pipeline {
         Maven = tool 'Maven'
     }
     stages {
-        stage('Detect OS') {
-                    steps {
-                        script {
-                            if (isUnix()) {
-                                echo 'Environnement Unix détecté'
-                                sh 'ls -la'
-                            } else {
-                                echo 'Environnement Windows détecté'
-                                bat 'dir'
-                            }
-                        }
-                    }
-        }
         stage('Checkout') {
             steps {
                 git 'https://github.com/Salwahnid/QualityAssurance_LibrarySystem.git'
@@ -24,18 +11,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '"${Maven}/mvn" clean compile'
+                bat '"${Maven}/mvn" clean compile'
             }
         }
         stage('Test') {
             steps {
-                sh '"${Maven}/mvn" test'
+                bat '"${Maven}/mvn" test'
             }
         }
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '"${Maven}/mvn" sonar:sonar'
+                    bat '"${Maven}/mvn" sonar:sonar'
                 }
             }
         }
