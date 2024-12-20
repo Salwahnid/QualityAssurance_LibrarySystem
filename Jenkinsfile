@@ -4,21 +4,19 @@ pipeline {
         MAVEN_HOME = tool 'Maven'
     }
     stages {
-            stage('Detect OS') {
-                steps {
-                    script {
-                        if (isUnix()) {
-                            echo 'Environnement Unix détecté'
-                            sh 'ls -la'
-                        } else {
-                            echo 'Environnement Windows détecté'
-                            bat 'dir'
+        stage('Detect OS') {
+                    steps {
+                        script {
+                            if (isUnix()) {
+                                echo 'Environnement Unix détecté'
+                                sh 'ls -la'
+                            } else {
+                                echo 'Environnement Windows détecté'
+                                bat 'dir'
+                            }
                         }
                     }
-                }
-            }
-    }
-    stages {
+        }
         stage('Checkout') {
             steps {
                 git 'https://github.com/Salwahnid/QualityAssurance_LibrarySystem.git'
