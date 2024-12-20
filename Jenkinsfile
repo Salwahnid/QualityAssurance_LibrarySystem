@@ -24,18 +24,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '"${Maven}/bin/mvn" clean compile'
+                sh '"${Maven}/mvn" clean compile'
             }
         }
         stage('Test') {
             steps {
-                sh '"${Maven}/bin/mvn" test'
+                sh '"${Maven}/mvn" test'
             }
         }
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '"${Maven}/bin/mvn" sonar:sonar'
+                    sh '"${Maven}/mvn" sonar:sonar'
                 }
             }
         }
