@@ -22,16 +22,6 @@ pipeline {
                 git 'https://github.com/Salwahnid/QualityAssurance_LibrarySystem.git'
             }
         }
-        stage('Inject .env') {
-            steps {
-                withCredentials([file(credentialsId: 'ENV_FILE_CRED', variable: 'ENV_FILE')]) {
-                    sh '''
-                    cp $ENV_FILE .env
-                    echo ".env file successfully copied!"
-                    '''
-                }
-            }
-        }
         stage('Build') {
             steps {
                 sh '"${MAVEN_HOME}/bin/mvn" clean compile'
