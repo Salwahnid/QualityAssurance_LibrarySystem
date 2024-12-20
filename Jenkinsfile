@@ -22,7 +22,7 @@ pipeline {
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    bat ""\"${Maven}\\bin\\mvn.cmd\" sonar:sonar"
+                    bat "\"${Maven}\\bin\\mvn.cmd\" sonar:sonar"
                 }
             }
         }
